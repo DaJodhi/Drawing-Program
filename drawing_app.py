@@ -3,6 +3,7 @@ from sys import exit as end
 from tkinter import *
 import tkinter.messagebox as box
 from random import choice
+from tkinter import filedialog
 
 settings = Tk()
 settings.title("Settings")
@@ -66,20 +67,16 @@ pensize_frame.pack(side=TOP)
 
 
 def export():
-    filename = export_name.get()
-
-    jim.getscreen().getcanvas().postscript(file=f"{filename}.ps")
+    filedialog.asksaveasfilename(initialdir="/", title="Select file", filetypes=(("ps files", "*.ps"), ("all files", "*.*")))
     box.showinfo("Export to another file type", "You can use a program called Ghostscript to convert the file.")
 
 
 export_frame = Frame(settings)
-export_name = Entry(export_frame, width=10)
 export_button = Button(export_frame, bg="gray", fg="white", text="Export", command=export)
 end_program_button = Button(export_frame, command=end, bg="red", fg="black", text="End Program")
 
-export_name.grid(column=1, row=1, padx=5, pady=15)
-export_button.grid(column=2, row=1, padx=10, pady=15)
-end_program_button.grid(column=3, row=1, padx=15, pady=15)
+export_button.grid(column=1, row=1, padx=10, pady=15)
+end_program_button.grid(column=2, row=1, padx=15, pady=15)
 export_frame.pack(side=TOP)
 
 x1 = 0
