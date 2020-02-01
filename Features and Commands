@@ -22,9 +22,9 @@ You can also use the W, A, S and D keys to make the turtle move a set distance u
 To rub out something, you can simply click the Erasor button, which will turn the turtle a dark pink colour and turn the pen colour white.
 Below this, there is another text box which alows you to enter a pen size. You can then click the pensize button to change it.
 
-Under that, there is a gray box with a text box, an export button, and a red end program button.
+Under that, there is an export button, and a red end program button.
 Clicking the end program button will close everything without saving anything. 
-If you enter the text "x" into the box, and then click the export button, a file x.ps will be saved in the same folder as the drawing program. 
+Clicking the export button will allow you to save the file. 
 You can find methods to turn the .ps file to a png or jpg file online.
 
 Features while drawing:
