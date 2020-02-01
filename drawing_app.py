@@ -4,6 +4,7 @@ from tkinter import *
 import tkinter.messagebox as box
 from random import choice
 from tkinter import filedialog
+from tkinter.colorchooser import *
 
 settings = Tk()
 settings.title("Settings")
@@ -17,11 +18,12 @@ jim.speed(0)
 jim.shape("circle")
 
 
-def submit_colour():
+def choose_colour():
     try:
-        jim.color(colour_entry.get())
-    except turtle.TurtleGraphicsError:
-        box.showerror("Colour Error", "Not a colour my dude.")
+        (triple, hexstr) = askcolor(title="Colour")
+        jim.color(hexstr)
+    except TypeError:
+        pass
 
 
 def random_colour():
@@ -29,12 +31,10 @@ def random_colour():
 
 
 colour_frame = Frame(settings, bg="black")
-colour_entry = Entry(colour_frame, width=10)
-change_colour_button = Button(colour_frame, command=submit_colour, fg="white", bg="gray", text="Submit Colour")
+change_colour_button = Button(colour_frame, command=choose_colour, fg="white", bg="gray", text="Choose Colour")
 random_colour_button = Button(colour_frame, command=random_colour, text="Random Colour", bg="gray", fg="white")
 
 
-colour_entry.grid(column=1, row=1, padx=10, pady=5)
 change_colour_button.grid(column=2, row=1, pady=5, padx=10)
 random_colour_button.grid(column=3, row=1, padx=10, pady=5)
 colour_frame.pack(side=TOP)
@@ -51,17 +51,15 @@ erasor_button.pack(side=TOP)
 
 
 def submit_pensize():
-    try:
-        jim.pensize(int(pensize_entry.get()))
-    except ValueError:
-        box.showerror("Value Error", "Yeah, that doesn't work.")
+    jim.pensize(int(pensize_sb.get()))
 
 
 pensize_frame = Frame(settings, bg="black")
-pensize_entry = Entry(pensize_frame, width=5)
+# only lets you choose numbers
+pensize_sb = Spinbox(pensize_frame, from_=1, to=50, width=5)
 submit_pensize_button = Button(pensize_frame, command=submit_pensize, bg="gray", fg="white", text="Pensize")
 
-pensize_entry.grid(column=1, row=1, padx=5, pady=10)
+pensize_sb.grid(column=1, row=1)
 submit_pensize_button.grid(column=2, row=1, padx=5, pady=10)
 pensize_frame.pack(side=TOP)
 
