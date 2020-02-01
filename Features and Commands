@@ -1,0 +1,40 @@
+Here's some features of the drawing program, along with how to use them.
+
+Feature list:
+1. Change the colour of the pen, including colour hex codes.
+2. Change the pen size.
+3. Export as a .ps with a filename of your choice.
+4. Use an erasor.
+5. Select a random colour from a basic list.
+6. Create squares easily with the WASD or arrow keys.
+7. Clear the display with the middle mouse button.
+8. Lift the pen off the screen or put it back on with the right mouse button.
+
+How you use it:
+When you run the program, you will see a python turtle window open up, along with a small Tkinter window labelled settings. You can change the settings of the turtle and export the image there.
+
+The first text box allows you to enter a colour. You can either enter some basic colours with text, or copy and paste a colour hex code from online. When the box has the colour you wish to change the turtle to, you can then click the button labelled submit colour.
+This will change the colour of the turtle. You can also press the random colour button for a random colour to be chosen from a small list.
+
+To draw, you can simply drag the turtle around. If you click on the turtle window without dragging the turtle, the turtle will create a straight line to that point.
+You can also use the W, A, S and D keys to make the turtle move a set distance up and down to create squares and basic patterns.
+
+To rub out something, you can simply click the Erasor button, which will turn the turtle a dark pink colour and turn the pen colour white.
+Below this, there is another text box which alows you to enter a pen size. You can then click the pensize button to change it.
+
+Under that, there is a gray box with a text box, an export button, and a red end program button.
+Clicking the end program button will close everything without saving anything. 
+If you enter the text "x" into the box, and then click the export button, a file x.ps will be saved in the same folder as the drawing program. 
+You can find methods to turn the .ps file to a png or jpg file online.
+
+Features while drawing:
+1. When you click the right mouse button, the pen will lift if it isn't already off the screen. If it is already off the screen (it isn't paitning anymore when being dragged), then it will go back down and start drawing again.
+2. The middle mouse button will clear the entire screen of any drawing. USE WITH CAUTION.
+3. You can use WASD or arrow keys to move the turtle up, down left and right. This can be used to easily create sqaures and patterns.
+
+
+Thanks for reading!
+
+You can use the Bug and Feature reports to submit a bug or request a new feature. Feel free to clone or copy code.
+
+Happy painting!
