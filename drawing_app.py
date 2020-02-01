@@ -3,13 +3,11 @@ from sys import exit as end
 from tkinter import *
 import tkinter.messagebox as box
 from random import choice
-# from os import system
-# from glob import glob
 
 settings = Tk()
 settings.title("Settings")
 settings.resizable(False, False)
-settings.geometry("380x380+800+400")
+settings.geometry("380x380")
 settings.configure(bg="black")
 
 colors = ["red", "orange", "yellow", "green", "blue", "purple", "black"]
@@ -47,7 +45,6 @@ def erasor():
     jim.pencolor("white")
 
 
-
 erasor_button = Button(settings, command=erasor, text="Erasor", fg="white", bg="gray")
 erasor_button.pack(side=TOP)
 
@@ -70,18 +67,9 @@ pensize_frame.pack(side=TOP)
 
 def export():
     filename = export_name.get()
-    from PIL import Image
+
     jim.getscreen().getcanvas().postscript(file=f"{filename}.ps")
     box.showinfo("Export to another file type", "You can use a program called Ghostscript to convert the file.")
-    # filelist = glob('*.ps')
-    # for file in filelist:
-    #    im = Image.open(file)
-    #    rgb_im = im.convert('RGB')
-    #    rgb_im.save(file.replace("ps", "jpg"), quality=95)
-
-    #     root = file[:-2]
-    #     pngfile = root + 'png'
-    #     system('convert ' + file + ' ' + pngfile)
 
 
 export_frame = Frame(settings)
@@ -95,6 +83,7 @@ end_program_button.grid(column=3, row=1, padx=15, pady=15)
 export_frame.pack(side=TOP)
 
 x1 = 0
+
 
 def up():
     jim.setheading(90)
@@ -122,23 +111,6 @@ def dragging(x, y):
     jim.goto(x, y)
     # makes function recursive
     jim.ondrag(dragging)
-
-
-# if function is going to be used with a mouse, x and y parameters are needed
-def settings(x, y):
-    inp = input("What do you want to do?")
-    if inp == "end":
-        end()
-    elif inp == "red" or "blue" or "yellow" or "black" or "green" or "orange" or "purple":
-        jim.color(inp)
-    else:
-        # try:
-        #     assert int(inp)
-        # except AssertionError:
-        print("Sorry, unexpected input.")
-        print("Ending program...")
-        end()
-        # jim.pensize(int(thing))
 
 
 def clear(x, y):
@@ -171,5 +143,3 @@ turtle.onkey(down, "Down")
 turtle.onkey(left, "Left")
 turtle.onkey(right, "Right")
 turtle.mainloop()
-
-
