@@ -1,131 +1,147 @@
+"""A simple drawing program based on Tkinter and Turtle."""
 import turtle
 from sys import exit as end
-from tkinter import *
+from tkinter import Tk, Frame, Button, Spinbox, TOP, filedialog
 import tkinter.messagebox as box
 from random import choice
-from tkinter import filedialog
-from tkinter.colorchooser import *
+from tkinter.colorchooser import askcolor
 
-settings = Tk()
-settings.title("Settings")
-settings.resizable(False, False)
-settings.geometry("380x380")
-settings.configure(bg="black")
+SETTINGS = Tk()
+SETTINGS.title("Settings")
+SETTINGS.resizable(False, False)
+SETTINGS.geometry("380x380")
+SETTINGS.configure(bg="black")
 
-colors = ["red", "orange", "yellow", "green", "blue", "purple", "black"]
-jim = turtle.Turtle()
-jim.speed(0)
-jim.shape("circle")
+COLOURS = ("red", "orange", "yellow", "green", "blue", "purple", "black")
+JIM = turtle.Turtle()
+JIM.speed(0)
+JIM.shape("circle")
 
 
 def choose_colour():
+    """Brings up a colour choosing screen"""
     try:
         (triple, hexstr) = askcolor(title="Colour")
-        jim.color(hexstr)
+        JIM.color(hexstr)
     except TypeError:
         pass
 
 
 def random_colour():
-    jim.color(choice(colors))
+    """Chooses a random colour from a small tuple"""
+    JIM.color(choice(COLOURS))
 
 
-colour_frame = Frame(settings, bg="black")
-change_colour_button = Button(colour_frame, command=choose_colour, fg="white", bg="gray", text="Choose Colour")
-random_colour_button = Button(colour_frame, command=random_colour, text="Random Colour", bg="gray", fg="white")
+COLOUR_FRAME = Frame(SETTINGS, bg="black")
+CHANGE_COLOUR_BUTTON = Button(COLOUR_FRAME, command=choose_colour,
+                              fg="white", bg="gray", text="Choose Colour")
+RANDOM_COLOUR_BUTTON = Button(COLOUR_FRAME, command=random_colour,
+                              text="Random Colour", bg="gray", fg="white")
 
 
-change_colour_button.grid(column=2, row=1, pady=5, padx=10)
-random_colour_button.grid(column=3, row=1, padx=10, pady=5)
-colour_frame.pack(side=TOP)
+CHANGE_COLOUR_BUTTON.grid(column=2, row=1, pady=5, padx=10)
+RANDOM_COLOUR_BUTTON.grid(column=3, row=1, padx=10, pady=5)
+COLOUR_FRAME.pack(side=TOP)
 
 
 def erasor():
-    jim.pensize(10)
-    jim.color("#e75480")
-    jim.pencolor("white")
+    """Makes the pen a decent size, changes the colour of the turtle
+    to an erasor pink, and changes the pen colour to white"""
+    JIM.pensize(10)
+    JIM.color("#e75480")
+    JIM.pencolor("white")
 
 
-erasor_button = Button(settings, command=erasor, text="Erasor", fg="white", bg="gray")
-erasor_button.pack(side=TOP)
+ERASOR_BUTTON = Button(SETTINGS, command=erasor, text="Erasor", fg="white", bg="gray")
+ERASOR_BUTTON.pack(side=TOP)
 
 
 def submit_pensize():
-    jim.pensize(int(pensize_sb.get()))
+    """Updates the pen size from the spinbox"""
+    JIM.pensize(int(PENSIZE_SB.get()))
 
 
-pensize_frame = Frame(settings, bg="black")
-# only lets you choose numbers
-pensize_sb = Spinbox(pensize_frame, from_=1, to=50, width=5)
-submit_pensize_button = Button(pensize_frame, command=submit_pensize, bg="gray", fg="white", text="Pensize")
+PENSIZE_FRAME = Frame(SETTINGS, bg="black")
+PENSIZE_SB = Spinbox(PENSIZE_FRAME, from_=1, to=50, width=5)
+SUBMIT_PENSIZE_BUTTON = Button(PENSIZE_FRAME, command=submit_pensize, bg="gray",
+                               fg="white", text="Pensize")
 
-pensize_sb.grid(column=1, row=1)
-submit_pensize_button.grid(column=2, row=1, padx=5, pady=10)
-pensize_frame.pack(side=TOP)
+PENSIZE_SB.grid(column=1, row=1)
+SUBMIT_PENSIZE_BUTTON.grid(column=2, row=1, padx=5, pady=10)
+PENSIZE_FRAME.pack(side=TOP)
 
 
 def export():
-    filedialog.asksaveasfilename(initialdir="/", title="Select file", filetypes=(("ps files", "*.ps"), ("all files", "*.*")))
-    box.showinfo("Export to another file type", "You can use a program called Ghostscript to convert the file.")
+    """Exports the file"""
+    filedialog.asksaveasfilename(initialdir="/", title="Select file",
+                                 filetypes=(("ps files", "*.ps"), ("all files", "*.*")))
+    box.showinfo("Export to another file type", "You can use a program "
+                                                "called Ghostscript to convert the file.")
 
 
-export_frame = Frame(settings)
-export_button = Button(export_frame, bg="gray", fg="white", text="Export", command=export)
-end_program_button = Button(export_frame, command=end, bg="red", fg="black", text="End Program")
+EXPORT_FRAME = Frame(SETTINGS)
+EXPORT_BUTTON = Button(EXPORT_FRAME, bg="gray", fg="white", text="Export", command=export)
+END_PROGRAM_BUTTON = Button(EXPORT_FRAME, command=end, bg="red", fg="black", text="End Program")
 
-export_button.grid(column=1, row=1, padx=10, pady=15)
-end_program_button.grid(column=2, row=1, padx=15, pady=15)
-export_frame.pack(side=TOP)
+EXPORT_BUTTON.grid(column=1, row=1, padx=10, pady=15)
+END_PROGRAM_BUTTON.grid(column=2, row=1, padx=15, pady=15)
+EXPORT_FRAME.pack(side=TOP)
 
-x1 = 0
+flag = 0
 
 
 def up():
-    jim.setheading(90)
-    jim.forward(100)
+    """Moves the turtle  set distance up"""
+    JIM.setheading(90)
+    JIM.forward(100)
 
 
 def down():
-    jim.setheading(270)
-    jim.forward(100)
+    """Moves the turtle a set distance down"""
+    JIM.setheading(270)
+    JIM.forward(100)
 
 
 def left():
-    jim.setheading(180)
-    jim.forward(100)
+    """Moves the turtle a set distance left"""
+    JIM.setheading(180)
+    JIM.forward(100)
 
 
 def right():
-    jim.setheading(0)
-    jim.forward(100)
+    """Moves the turtle a set distance right"""
+    JIM.setheading(0)
+    JIM.forward(100)
 
 
 def dragging(x, y):
-    jim.ondrag(None)
+    """Allows you to pull the turtle around to draw"""
+    JIM.ondrag(None)
     # makes the turtle follow the mouse
-    jim.goto(x, y)
+    JIM.goto(x, y)
     # makes function recursive
-    jim.ondrag(dragging)
+    JIM.ondrag(dragging)
 
 
 def clear(x, y):
-    jim.clear()
+    """Clears the canvas"""
+    JIM.clear()
 
 
 def change(x, y):
-    global x1
-    if x1 == 1:
-        x1 = 0
-        jim.pendown()
+    """Allows you to lift the turtle's pen up easily with the right mouse button"""
+    global flag
+    if flag == 1:
+        flag = 0
+        JIM.pendown()
     else:
-        jim.penup()
-        x1 += 1
+        JIM.penup()
+        flag += 1
 
 
 turtle.listen()
-# anywhere on the turtle screen, onclick is only on the turtle
 # 1 is left mouse button, 2 is middle, and 3 is right
-jim.ondrag(dragging)
+JIM.ondrag(dragging)
 turtle.onscreenclick(dragging, 1)
 turtle.onscreenclick(clear, 2)
 turtle.onscreenclick(change, 3)
