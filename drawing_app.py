@@ -6,6 +6,8 @@ import tkinter.messagebox as box
 from random import choice
 from tkinter.colorchooser import askcolor
 
+# Version 2.1.1
+
 SETTINGS = Tk()
 SETTINGS.title("Settings")
 SETTINGS.resizable(False, False)
@@ -19,7 +21,7 @@ JIM.shape("circle")
 
 
 def choose_colour():
-    """Brings up a colour choosing screen"""
+    """Bring up a colour choosing screen."""
     try:
         (triple, hexstr) = askcolor(title="Colour")
         JIM.color(hexstr)
@@ -28,7 +30,7 @@ def choose_colour():
 
 
 def random_colour():
-    """Chooses a random colour from a small tuple"""
+    """Choose a random colour from a small tuple."""
     JIM.color(choice(COLOURS))
 
 
@@ -45,8 +47,11 @@ COLOUR_FRAME.pack(side=TOP)
 
 
 def erasor():
-    """Makes the pen a decent size, changes the colour of the turtle
-    to an erasor pink, and changes the pen colour to white"""
+    """Easy way to make the turtle an erasor.
+
+    Make the pen a decent size, changes the colour of the turtle
+    to an erasor pink, and changes the pen colour to white
+    """
     JIM.pensize(10)
     JIM.color("#e75480")
     JIM.pencolor("white")
@@ -57,7 +62,7 @@ ERASOR_BUTTON.pack(side=TOP)
 
 
 def submit_pensize():
-    """Updates the pen size from the spinbox"""
+    """Update the pen size from the spinbox."""
     JIM.pensize(int(PENSIZE_SB.get()))
 
 
@@ -72,7 +77,7 @@ PENSIZE_FRAME.pack(side=TOP)
 
 
 def export():
-    """Exports the file"""
+    """Export the file."""
     filedialog.asksaveasfilename(initialdir="/", title="Select file",
                                  filetypes=(("ps files", "*.ps"), ("all files", "*.*")))
     box.showinfo("Export to another file type", "You can use a program "
@@ -91,31 +96,31 @@ flag = 0
 
 
 def up():
-    """Moves the turtle  set distance up"""
+    """Move the turtle a set distance up."""
     JIM.setheading(90)
     JIM.forward(100)
 
 
 def down():
-    """Moves the turtle a set distance down"""
+    """Move the turtle a set distance down."""
     JIM.setheading(270)
     JIM.forward(100)
 
 
 def left():
-    """Moves the turtle a set distance left"""
+    """Move the turtle a set distance left."""
     JIM.setheading(180)
     JIM.forward(100)
 
 
 def right():
-    """Moves the turtle a set distance right"""
+    """Move the turtle a set distance right."""
     JIM.setheading(0)
     JIM.forward(100)
 
 
 def dragging(x, y):
-    """Allows you to pull the turtle around to draw"""
+    """Pull the turtle around to draw."""
     JIM.ondrag(None)
     # makes the turtle follow the mouse
     JIM.goto(x, y)
@@ -124,12 +129,12 @@ def dragging(x, y):
 
 
 def clear(x, y):
-    """Clears the canvas"""
+    """Clear the canvas."""
     JIM.clear()
 
 
 def change(x, y):
-    """Allows you to lift the turtle's pen up easily with the right mouse button"""
+    """Lift the turtle's pen up easily with the right mouse button."""
     global flag
     if flag == 1:
         flag = 0
