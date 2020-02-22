@@ -3,10 +3,11 @@ import turtle
 from sys import exit as end
 from tkinter import Tk, Frame, Button, Spinbox, TOP, filedialog
 import tkinter.messagebox as box
-from random import choice
 from tkinter.colorchooser import askcolor
+from random import choice
 
-# Version 2.1.1
+
+# Version 2.1.3
 
 SETTINGS = Tk()
 SETTINGS.title("Settings")
@@ -20,7 +21,7 @@ JIM.speed(0)
 JIM.shape("circle")
 
 
-def choose_colour():
+def choose_colour(empty=None):
     """Bring up a colour choosing screen."""
     try:
         (triple, hexstr) = askcolor(title="Colour")
@@ -46,7 +47,7 @@ RANDOM_COLOUR_BUTTON.grid(column=3, row=1, padx=10, pady=5)
 COLOUR_FRAME.pack(side=TOP)
 
 
-def erasor():
+def erasor(empty=None):
     """Easy way to make the turtle an erasor.
 
     Make the pen a decent size, changes the colour of the turtle
@@ -76,7 +77,7 @@ SUBMIT_PENSIZE_BUTTON.grid(column=2, row=1, padx=5, pady=10)
 PENSIZE_FRAME.pack(side=TOP)
 
 
-def export():
+def export(empty=None):
     """Export the file."""
     filedialog.asksaveasfilename(initialdir="/", title="Select file",
                                  filetypes=(("ps files", "*.ps"), ("all files", "*.*")))
@@ -92,7 +93,7 @@ EXPORT_BUTTON.grid(column=1, row=1, padx=10, pady=15)
 END_PROGRAM_BUTTON.grid(column=2, row=1, padx=15, pady=15)
 EXPORT_FRAME.pack(side=TOP)
 
-flag = 0
+FLAG = 0
 
 
 def up():
@@ -135,13 +136,13 @@ def clear(x, y):
 
 def change(x, y):
     """Lift the turtle's pen up easily with the right mouse button."""
-    global flag
-    if flag == 1:
-        flag = 0
+    global FLAG
+    if FLAG == 1:
+        FLAG = 0
         JIM.pendown()
     else:
         JIM.penup()
-        flag += 1
+        FLAG += 1
 
 
 turtle.listen()
@@ -150,12 +151,11 @@ JIM.ondrag(dragging)
 turtle.onscreenclick(dragging, 1)
 turtle.onscreenclick(clear, 2)
 turtle.onscreenclick(change, 3)
-turtle.onkey(up, "w")
-turtle.onkey(down, "s")
-turtle.onkey(left, "a")
-turtle.onkey(right, "d")
 turtle.onkey(up, "Up")
 turtle.onkey(down, "Down")
 turtle.onkey(left, "Left")
 turtle.onkey(right, "Right")
+SETTINGS.bind("<Control-s>", export)
+SETTINGS.bind("<Control-e>", erasor)
+SETTINGS.bind("<Control-c>", choose_colour)
 turtle.mainloop()
